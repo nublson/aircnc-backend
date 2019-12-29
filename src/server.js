@@ -1,8 +1,18 @@
 const express = require('express')
+const mongoose = require('mongoose')
+require('dotenv/config')
+
 const routes = require('./routes')
+const port = process.env.PORT || 3333
+const dbUrl = process.env.MONGO_URL
 
 const app = express()
-const port = process.env.PORT || 3333
+app.use(express.json())
+
+mongoose.connect(dbUrl, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+})
 
 app.use(routes)
 
